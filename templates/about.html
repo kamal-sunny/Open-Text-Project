@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - WordQuest 5</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+  <nav>
+    <div class="logo">WordQuest <span>5</span></div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    </div>
+  </nav>
+
+  <!-- your about content as you wrote -->
+  <section class="about-wrapper">
+    <h1>How to Play</h1>
+
+    <!-- Introductory text -->
+    <div class="about-text">
+        <p>
+        WordQuest 5 is a daily word-guess challenge designed for quick, addictive fun.
+        Each round picks a secret five-letter English word from our curated list.
+        Your mission is to reveal it in as few guesses as possible.
+        </p>
+        <p>
+        Every guess gives feedback with vibrant color codes, helping you zero in
+        on the hidden word. You can attempt up to <strong>three games per day</strong>,
+        so use your guesses wisely!
+        </p>
+    </div>
+
+    <!-- Wordle-style demo grid -->
+    <div class="demo-grid">
+        <div class="row">
+        <span class="tile grey">A</span>
+        <span class="tile grey">U</span>
+        <span class="tile grey">D</span>
+        <span class="tile grey">I</span>
+        <span class="tile orange">O</span>
+        </div>
+        <div class="row">
+        <span class="tile grey">H</span>
+        <span class="tile green">O</span>
+        <span class="tile grey">M</span>
+        <span class="tile grey">E</span>
+        <span class="tile green">R</span>
+        </div>
+        <div class="row">
+        <span class="tile green">J</span>
+        <span class="tile green">O</span>
+        <span class="tile green">K</span>
+        <span class="tile green">E</span>
+        <span class="tile green">R</span>
+        </div>
+    </div>
+
+    <!-- Detailed explanation below grid -->
+    <div class="about-text">
+        <p>
+        Each day, you can attempt <strong>up to 3 secret words</strong>.  
+        For each word you have <strong>5 guesses</strong>.
+        </p>
+        <ul>
+        <li><span class="legend green"></span> Correct letter & position</li>
+        <li><span class="legend orange"></span> Correct letter, wrong position</li>
+        <li><span class="legend grey"></span> Letter not in the word</li>
+        </ul>
+        <p>
+        <strong>For Players:</strong> Test your vocabulary, sharpen your logic,
+        and track your progress over time.
+        </p>
+        <p>
+        <strong>For Admins:</strong> Manage the word bank and view
+        daily/player reports to keep the challenge fresh.
+        </p>
+        <p>
+        Whether you’re chasing streaks or just warming up your brain,
+        WordQuest 5 delivers a quick hit of strategy and fun every day.
+        </p>
+    </div>
+  </section>
+</body>
+</html>

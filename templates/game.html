@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Player Game - WordQuest 5</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .word-box {
+      padding: 10px;
+      border: 2px solid #ccc;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-right: 5px;
+      color: #fff;
+      min-width: 40px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .info-text {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">WordQuest <span>5</span></div>
+    <div class="nav-links">
+      <a href="{{ url_for('player_logout') }}">Logout</a>
+    </div>
+  </nav>
+
+  <section class="form-section">
+    <h2>Guess the Word</h2>
+
+    <div id="wordContainer" style="
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;">
+      {% for item in history %}
+        <div style="display:flex; margin-bottom:10px;">
+          {% for i in range(item.guess|length) %}
+            <div class="word-box" style="background-color: {{ item.feedback[i]|lower }}">{{ item.guess[i] }}</div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if not game_over %}
+      <!-- Normal play form -->
+      <form id="guessForm">
+        <input type="text" id="guessInput" maxlength="5" pattern="[A-Z]{5}" placeholder="Enter 5 letters" required>
+        <button type="submit" class="btn">Submit Guess</button>
+      </form>
+    {% else %}
+      {% if daily_limit_reached %}
+        <p class="info-text" style="color:red;">⚠️ Daily limit reached. Come back tomorrow!</p>
+      {% else %}
+        <p class="info-text" style="color:blue;">Re-login to try again</p>
+      {% endif %}
+    {% endif %}
+
+    <p id="gameMessage">{{ message }}</p>
+    <p>Attempts: <span id="attempts">{{ attempts }}</span>/5</p>
+  </section>
+
+  <script>
+    const input = document.getElementById('guessInput');
+    if(input){
+      input.addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+      });
+    }
+
+    const form = document.getElementById('guessForm');
+    const container = document.getElementById('wordContainer');
+    let attemptsElem = document.getElementById('attempts');
+    let attempts = attemptsElem ? parseInt(attemptsElem.innerText) : 0;
+
+    function createWordBox(letter, color) {
+      const box = document.createElement('div');
+      box.textContent = letter;
+      box.classList.add('word-box');
+      box.style.backgroundColor = color.toLowerCase();
+      return box;
+    }
+
+    if(form){
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const guess = input.value.toUpperCase();
+
+        const response = await fetch("{{ url_for('guess_word') }}", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `guess=${guess}`
+        });
+
+        const data = await response.json();
+        if (data.error) return alert(data.error);
+
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.marginBottom = '10px';
+        data.feedback.forEach((color, i) => {
+          const box = createWordBox(data.guess[i], color);
+          row.appendChild(box);
+        });
+        container.appendChild(row);
+
+        attempts = data.attempts;
+        attemptsElem.innerText = attempts;
+        document.getElementById('gameMessage').innerText = data.message;
+
+        if(data.game_over){
+          form.style.display = 'none';
+        }
+
+        input.value = '';
+        input.focus();
+      });
+    }
+  </script>
+</body>
+</html>

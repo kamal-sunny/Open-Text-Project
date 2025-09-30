@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register - WordQuest 5</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+    .success {
+      color: green;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">WordQuest <span>5</span></div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('player_page') }}">Player Login</a>
+    </div>
+  </nav>
+
+  <section class="form-section">
+    <h2>Player Registration</h2>
+
+    <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+      <input type="text" id="username" name="username" placeholder="Enter Username" required>
+      <div id="usernameError" class="error">At least 5 letters, must include both upper & lower case</div>
+
+      <input type="password" id="password" name="password" placeholder="Enter Password" required>
+      <div id="passwordError" class="error">At least 5 characters, include letter, number & one of $, %, *, @</div>
+
+      <br>
+      <button type="submit" class="btn">Register</button>
+    </form>
+
+    <br>
+    <p>Already registered? <a href="{{ url_for('player_page') }}" style="color:#00ff88;text-decoration:underline;">Login here</a></p>
+  </section>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      let valid = true;
+
+      // Username: At least 5 letters, both upper & lower case
+      let usernameRegex = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{5,}$/;
+      if (!usernameRegex.test(username)) {
+        document.getElementById("usernameError").style.display = "block";
+        valid = false;
+      } else {
+        document.getElementById("usernameError").style.display = "none";
+      }
+
+      // Password: At least 5 chars, include letter, number, special
+      let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$%*@])[A-Za-z\d$%*@]{5,}$/;
+      if (!passwordRegex.test(password)) {
+        document.getElementById("passwordError").style.display = "block";
+        valid = false;
+      } else {
+        document.getElementById("passwordError").style.display = "none";
+      }
+
+      if (!valid) {
+        event.preventDefault(); // stop form submission
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+/* -------- Global -------- */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background:#0d0d0d;
+    color:#fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+a { text-decoration:none; color:inherit; }
+
+/* Navbar */
+nav {
+    width:100%;
+    padding:20px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:10;
+}
+.logo {
+    font-size:1.6rem;
+    font-weight:bold;
+    color:#00ff88;
+    white-space: nowrap;
+    transition: font-size 0.3s ease;
+}
+.logo span { color:#fff; }
+.nav-links a {
+    margin-left:25px;
+    color:#fff;
+    transition:color .2s;
+}
+.nav-links a:hover { color:#00ff88; }
+
+/* Hero Section */
+.hero {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+}
+.hero h1 { font-size:3rem; margin-bottom:10px; }
+.hero h1 span { color:#00ff88; }
+.hero p { max-width:600px; margin-bottom:40px; color:#aaa; }
+
+/* Buttons */
+.btn {
+    padding:12px 30px;
+    font-size:1rem;
+    border:2px solid #00ff88;
+    border-radius:8px;
+    background:transparent;
+    color:#00ff88;
+    cursor:pointer;
+    transition:all 0.25s ease;
+    display:inline-block;
+}
+.btn:hover {
+    background-color: #121212;
+    box-shadow: 0 0 10px #00ff88;
+    color: #00ff88;
+}
+.btn-group { display:flex; gap:20px; }
+
+/* Forms */
+.form-section {
+    max-width:400px;
+    margin:120px auto 40px;
+    padding:20px;
+    text-align:center;
+}
+.form-section input,
+.form-section select {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+    background:#1a1a1a;
+    color:#fff;
+}
+.form-section input:focus { outline:2px solid #00ff88; }
+
+/* Game Grid */
+.grid {
+    display:grid;
+    grid-template-columns:repeat(5,60px);
+    gap:8px;
+    justify-content:center;
+    margin:20px 0;
+}
+.grid .cell {
+    width:60px; height:60px;
+    display:flex; justify-content:center; align-items:center;
+    font-size:1.5rem;
+    background:#1a1a1a;
+    border-radius:6px;
+}
+.cell.green { background:#00ff88; color:#0d0d0d; }
+.cell.orange{ background:orange; color:#0d0d0d; }
+.cell.grey  { background:#444; }
+
+/* Utility */
+.hidden { display:none; }
+
+/* ----- Alt-link under login ----- */
+.alt-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+    text-align: center;
+}
+.alt-link a {
+    color: #00ff88;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.alt-link a:hover {
+    color: #fff;
+}
+
+/* ----- About Page ----- */
+.about-section,
+.about-wrapper {
+    max-width: 900px;
+    margin: 120px auto 60px;
+    padding: 20px;
+    text-align: left;
+    line-height: 1.6;
+}
+.about-section h1,
+.about-wrapper h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #00ff88;
+}
+.about-section ul {
+    margin: 10px 0 20px 20px;
+    list-style: disc;
+}
+.about-section .green  { color:#00ff88; }
+.about-section .orange { color:orange; }
+.about-section .grey   { color:#888; }
+
+/* Demo grid */
+.demo-grid {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+.demo-grid .row {
+    display: flex;
+    justify-content: center;
+    margin: 4px 0;
+}
+.tile {
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #fff;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+.tile:hover {
+    transform: scale(1.1);
+}
+.tile.green  { background-color: #00ff88; }
+.tile.orange { background-color: #ff9800; }
+.tile.grey   { background-color: #555; }
+
+.about-text {
+    text-align: left;
+    margin: 0 auto;
+    max-width: 600px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #ddd;
+}
+.about-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+.about-text li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+.legend {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+.legend.green  { background-color: #00ff88; }
+.legend.orange { background-color: #ff9800; }
+.legend.grey   { background-color: #555; }
+
+.about-text p {
+    margin: 18px 0;
+    font-size: 1.05rem;
+    color: #ddd;
+}
+.about-text strong {
+    color: #00ff88;
+}
+
+/* Tour Overlay */
+#tour-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#tour-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#tour-tooltip {
+  position: fixed;
+  background: #1a1a1a;
+  border: 2px solid #00ff88;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  z-index: 1000;
+  width: 280px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+#tour-tooltip.active {
+  opacity: 1;
+  transform: scale(1);
+  animation: bounceIn 0.3s forwards;
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.tour-highlight {
+  box-shadow: 0 0 15px #00ff88, 0 0 25px #00ff88 inset;
+  transition: box-shadow 0.3s ease;
+  border-radius: 5px;
+}
+
+#tour-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #00ff88;
+  color: #0d0d0d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ff88, 0 0 25px #00ff88 inset;
+  z-index: 10000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#tour-button:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 25px #00ff88, 0 0 40px #00ff88 inset;
+}
+
+.tour-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: nowrap;
+}
+.tour-buttons button {
+    flex: 1;
+    padding: 10px 20px;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    background: transparent;
+    color: #00ff88;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.tour-buttons button:hover {
+    background-color: #121212;
+    color: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
+    transform: scale(1.05);
+}
+.tour-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 1024px) {
+    nav { padding: 20px 40px; }
+    .logo { font-size:1.5rem; }
+    .hero h1 { font-size:2.5rem; }
+    .about-section,
+    .about-wrapper { max-width: 90%; margin:100px auto 50px; padding:15px; }
+    .about-section h1,
+    .about-wrapper h1 { font-size: 2.2rem; }
+    .about-text { font-size: 1rem; }
+}
+@media (max-width: 768px) {
+    nav { padding: 15px 25px; }
+    .logo { font-size:1.4rem; }
+    .hero h1 { font-size:2.1rem; }
+    .about-section,
+    .about-wrapper { max-width:95%; margin:80px auto 40px; padding:15px; }
+    .about-section h1,
+    .about-wrapper h1 { font-size: 1.9rem; }
+    .about-text { font-size: 0.95rem; }
+}
+@media (max-width: 480px) {
+    nav { padding: 12px 20px; }
+    .logo { font-size:1.2rem; }
+    .hero h1 { font-size:1.8rem; }
+    .about-section,
+    .about-wrapper { max-width:100%; margin:60px auto 30px; padding:10px; }
+    .about-section h1,
+    .about-wrapper h1 { font-size: 1.6rem; }
+    .about-text { font-size: 0.9rem; line-height: 1.6; }
+}
+/* Center the demo grid */
+.demo-grid {
+    display: flex;            /* use flex instead of inline-block */
+    flex-direction: column;   /* keep rows stacked */
+    align-items: center;      /* horizontal centering */
+    justify-content: center;  /* vertical alignment of rows inside if needed */
+    margin: 0 auto 30px;      /* auto left/right keeps it centered in parent */
+}
+.demo-grid .row {
+    display: flex;
+    justify-content: center;  /* center tiles in each row */
+    margin: 4px 0;
+}

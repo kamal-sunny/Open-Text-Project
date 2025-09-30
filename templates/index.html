@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WordQuest 5</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+<body>
+  <nav>
+    <div class="logo">WordQuest <span>5</span></div>
+    <div class="nav-links">
+      <a id="register-link" href="{{ url_for('register') }}">Register</a>
+      <a id="about-link" href="{{ url_for('about') }}">About</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Welcome to <span>WordQuest 5</span></h1>
+    <p>Guess the hidden 5-letter word! Choose your role below.</p>
+    <div class="btn-group">
+      <a id="player-btn" class="btn" href="{{ url_for('player_page') }}">Player</a>
+      <a id="admin-btn" class="btn" href="{{ url_for('admin_page') }}">Admin</a>
+    </div>
+  </section>
+
+  <!-- Floating Tour Button -->
+  <div id="tour-button">?</div>
+
+  <!-- Tour Elements -->
+  <div id="tour-overlay"></div>
+  <div id="tour-tooltip">
+    <p id="tour-text"></p>
+    <div class="tour-buttons">
+      <button id="tour-prev">Back</button>
+      <button id="tour-next">Next</button>
+      <button id="tour-skip">Skip</button>
+    </div>
+  </div>
+</body>
+</html>

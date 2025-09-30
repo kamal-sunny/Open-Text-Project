@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard - WordQuest 5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #000; /* black background */
+      color: #39FF14; /* neon green text */
+    }
+    h1, h2 {
+      text-align: center;
+      color: #fff; /* headings in white */
+    }
+    table {
+      width: 90%;
+      margin: 10px auto 30px auto;
+      border-collapse: collapse;
+      background-color: #111; /* dark table background */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid white; /* neon green borders */
+      text-align: center;
+      color: #39FF14; /* neon green text */
+    }
+    th {
+      background-color: #111; /* dark header background */
+    }
+    tr:nth-child(even) {
+      background-color: #222; /* slightly lighter row */
+    }
+    a, button {
+      text-decoration: none;
+      color: #000; /* text black on green button */
+      background-color: #39FF14; /* neon green button */
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    a:hover, button:hover {
+      background-color: #32CD32; /* brighter green on hover */
+    }
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="text"] {
+      padding: 5px;
+      width: 200px;
+      background-color: #111;
+      color: #39FF14;
+      border: 1px solid #39FF14;
+    }
+    input[type="text"]::placeholder {
+      color: #39FF14;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome, {{ admin }}</h1>
+  <div style="text-align:center; margin-bottom: 30px;">
+    <a href="{{ url_for('admin_logout') }}">Logout</a>
+  </div>
+
+  <!-- Registered Players -->
+  <h2>Registered Players</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Registered On</th>
+    </tr>
+    {% for player in players %}
+    <tr>
+      <td>{{ player.id }}</td>
+      <td>{{ player.username }}</td>
+      <td>{{ player.reg_date }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Logged-in Players / Game Results -->
+  <h2>Logged-in Players (Game Results)</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Win Status</th>
+      <th>Last Login</th>
+    </tr>
+    {% for lp in logged_in_players %}
+    <tr>
+      <td>{{ lp.id }}</td>
+      <td>{{ lp.username }}</td>
+      <td>{{ lp.win_status }}</td>
+      <td>{{ lp.last_login }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <!-- Word Bank Management -->
+  <h2>Word Bank</h2>
+  <form method="POST" action="{{ url_for('add_word') }}">
+    <input type="text" name="word" placeholder="Add new word" required>
+    <button type="submit">Add Word</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Word</th>
+      <th>Added By</th>
+      <th>Action</th>
+    </tr>
+    {% for w in words %}
+    <tr>
+      <td>{{ w.id }}</td>
+      <td>{{ w.word }}</td>
+      <td>{{ w.added_by }}</td>
+      <td><a href="{{ url_for('delete_word', word_id=w.id) }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
